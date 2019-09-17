@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route,  Switch, BrowserRouter } from 'react-router-dom';
-import Menu from 'components/Menu';
 import './App.scss';
 
 import HomePage from 'components/HomePage';
