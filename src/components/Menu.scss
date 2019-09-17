@@ -1,62 +1,52 @@
-// @import url('https://fonts.googleapis.com/css?family=Rubik:300');
-$bg: #34495e;
-$primarycolor: #f39c12;
-$white: #ecf0f1;
+ // @import url('https://fonts.googleapis.com/css?family=Rubik:300');
 $font: 'Rubik';
 
 .menu-container {
-  box-shadow: 0 0px 50px hsla(0, 0, 0, 0.7);
-  position: relative;
-  transform: translate(0);
-  margin: 3em auto;
-  width: 350px;
+    width: 20%;
+    margin: auto;
 }
 
-.menu-item,
-.menu-item--active {
-  height: 60px;
-  width: 100%;
-}
-
-.menu-item {
-  align-items: center;
-  color: $white;
-  cursor: pointer;
+/* the menu */
+.menu-box {
   display: flex;
-  font-size: 24px;
-  justify-content: center;
-  letter-spacing: 4px;
-  text-align: center;
-  
-  &.active {
-    box-shadow: 0 2px 3px hsla(0, 0, 0, 0.7);
-  }
- 
-  &:nth-of-type(1) {
-    background: $primarycolor;
-  }
-  &:nth-of-type(2) {
-    background: darken($primarycolor, 5%);
-  }
-  &:nth-of-type(3) {
-    background: darken($primarycolor, 10%);
-  }
-  &:nth-of-type(4) {
-    background: darken($primarycolor, 15%);
-  }
-  &:nth-of-type(5) {
-    background: darken($primarycolor, 20%);
-  }
+  flex-direction: column;
+  background: #ff944d;
 }
 
-.menu-item--active {
-  background: $primarycolor;
-  border-radius: 2px !important;
-  box-shadow: 0 0px 50px hsla(0, 0, 0, 0.5);
-  left: 50%;
-  padding: 0 7px;
-  position: absolute;
-  transform: translateX(-50%);
-  transition: all 300ms;
-  z-index: -1;
+.menu-box .title {
+  background: #11a8ab;
+  color: white;
+  font-size: 1.1em; /* 17px; */
+	display: block;
+	margin: 0;
+  padding: 20px;
+	text-align: center;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}  
+
+.menu-row {
+  text-align: center;
+  border-radius: 5px;
 }
+
+.menu-option {
+  padding: 20px;
+	border-bottom: 1px solid #b34700;
+	-webkit-transition: background .5s;
+	transition: background .5s;  
+}
+
+.menu-option a {
+	text-decoration: none;
+	font-size: 15px;
+  color: #fff;
+}
+
+.menu-option:hover {
+  background: #ff6600;
+	border-top: 1px solid #b34700;
+}
+
+
+

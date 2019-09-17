@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './Menu.scss'
 
 class Menu extends Component {
@@ -7,50 +8,35 @@ class Menu extends Component {
       
       this.state = {
         activeItem: '',
-        activeItemPosition: 0,
-        activeItemColor: '',
         menuItems: props.options
-      }
-      
+      }     
       this.handleClick = this.handleClick.bind(this)
     }
-    
+
     handleClick(activeItem) {
       return e => {
         e.preventDefault()
-      
-        this.setState({
-          activeItem,
-          activeItemPosition: document.getElementById(activeItem).offsetTop,
-          activeItemColor: window.getComputedStyle(document.getElementById(activeItem)).getPropertyValue('background-color'),
-        })
+        console.log("Clicked on ",activeItem)
       }
     }
     
     render() {
-      const menuItems = this.state.menuItems.map(item => <MenuItem item={ item } handleClick={ this.handleClick }/>)
+      const { title, options } = this.props;
       return (
-        <div className='menu-container'>
-          <span className='menu-item--active' style={{ top: this.state.activeItemPosition, backgroundColor: this.state.activeItemColor }}/>
-          { menuItems }
+        <div className="menu-container">
+          <div className="menu-box">
+            <div className="menu-row">
+              <h2 className="title">{title}</h2>
+            </div>
+            { options.map( (option,index) => 
+              <div className="menu-row menu-option" key={index}>
+                <Link to={option.path}>{option.text}</Link>
+              </div>
+            )}
+          </div>
         </div>
       )
     }
   }
   
-  ///////////////////
-  // MenuItem      //
-  ///////////////////
-  function MenuItem(props) {
-    return (
-      <div 
-        className='menu-item'
-        id={ props.item.text }
-        onClick={ props.handleClick(props.item.text) }
-      >
-        { props.item.text.toUpperCase() }
-      </div>
-    )
-  }
-
   export default Menu;
