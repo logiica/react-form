@@ -1,20 +1,10 @@
 import React, { Component } from 'react';
 
-import { render } from 'react-dom';
 import { withRouter } from 'react-router-dom';
 import { Form, Field } from 'react-final-form'
 import './Form.scss'
 
-//const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
-const TextField = (name, placeholder) => (
-  <Field
-    name={name}
-    component="input"
-    type="text"
-    placeholder={placeholder}
-  />
-)
 class SimpleForm extends Component {
 
   constructor(props) {
@@ -22,11 +12,19 @@ class SimpleForm extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  /*async */onSubmit(values) {
-    //await sleep(300)
+  onSubmit(values) {
     window.alert(JSON.stringify(values, 0, 2));
     this.props.history.push('/');
   }
+
+  renderInputField = (name,type,placeholder) => (
+    <Field
+      name={name}
+      component="input"
+      type={type}
+      placeholder={placeholder}
+    />
+  )
 
   render() {
     return (
@@ -37,25 +35,16 @@ class SimpleForm extends Component {
           <form onSubmit={handleSubmit}>
             <div>
               <label>First Name</label>
-              <Field
-                name="firstName"
-                component="input"
-                type="text"
-                placeholder="First Name"
+              {this.renderInputField("firstName","text","First Name")}
               />
             </div>               
             <div>
               <label>Last Name</label>
-              <Field
-                name="lastName"
-                component="input"
-                type="text"
-                placeholder="Last Name"
-              />      
+              {this.renderInputField("lastName","text","Last Name")}     
             </div>
             <div>
               <label>Employed</label>
-              <Field name="employed" component="input" type="checkbox" />
+              {this.renderInputField("employed","checkbox",null)} 
             </div>
             <div>
               <label>Favorite Color</label>
@@ -68,6 +57,7 @@ class SimpleForm extends Component {
             </div>  
             <div>
               <label>Toppings</label>
+              {/* multiple select */}
               <Field name="toppings" component="select" multiple>
                 <option value="chicken">🐓 Chicken</option>
                 <option value="ham">🐷 Ham</option>
@@ -80,6 +70,7 @@ class SimpleForm extends Component {
             <div>
               <label>Sauces</label>
               <div>
+                {/* multi-select checkbox */}
                 <label>
                   <Field
                     name="sauces"
@@ -120,6 +111,7 @@ class SimpleForm extends Component {
             </div>  
             <div>
               <label>Best Stooge</label>
+              {/* radio button set */}
               <div>
                 <label>
                   <Field
