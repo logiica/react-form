@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
+import { Component } from 'react'
 
 class NewEditForm extends Component {
-    
-  render() {
+  render () {
     return (
       <h1>New/Edit Form</h1>
     )
   }
 }
 
-export default NewEditForm;
+export default NewEditForm

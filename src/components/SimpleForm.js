@@ -1,10 +1,14 @@
-import React, { Component } from 'react';
-
-import { withRouter } from 'react-router-dom';
+import { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import { Form, Field } from 'react-final-form'
+import Select from 'react-select'
 import './Form.scss'
 
+const ReactSelectAdapter = ({ input, ...rest }) => (
+  <Select {...input} {...rest} searchable ismulti style={{width: '100%'}}/>
+)
 
+const activityList = { 'E': 'Eat', 'P': 'Play','S': 'Sleep'};
 class SimpleForm extends Component {
 
   constructor(props) {
@@ -66,10 +70,14 @@ class SimpleForm extends Component {
   }
 
   render() {
+    let activityList = [{value: 'eat', label: 'Eat'},
+                        {value: 'play', label: 'Play'},
+                        {value: 'party', label: 'Party'},
+                        {value: 'sleep', label: 'Sleep'}]
     return (
       <Form
         onSubmit={this.onSubmit}
-        initialValues={{ type: 'dog', ageGroup:"<= 5", employed: false }}
+        initialValues={{ type: 'dog', ageGroup:"<= 5" }}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form onSubmit={handleSubmit}>
             <div>
@@ -88,10 +96,6 @@ class SimpleForm extends Component {
                 )}
               </div>
             </div>                          
-            <div>
-              <label>Employed</label>
-              {this.renderInputField("employed","checkbox",null)} 
-            </div>
             <div>
               <label>Age Group</label>
               {this.renderSelect("ageGroup",
@@ -119,48 +123,14 @@ class SimpleForm extends Component {
               }
             </div>
             <div>
-              <label>Sauces</label>
-              <div>
-                {/* multi-select checkbox */}
-                <label>
-                  <Field
-                    name="sauces"
-                    component="input"
-                    type="checkbox"
-                    value="ketchup"
-                  />{' '}
-                  Ketchup
-                </label>
-                <label>
-                  <Field
-                    name="sauces"
-                    component="input"
-                    type="checkbox"
-                    value="mustard"
-                  />{' '}
-                  Mustard
-                </label>
-                <label>
-                  <Field
-                    name="sauces"
-                    component="input"
-                    type="checkbox"
-                    value="mayonnaise"
-                  />{' '}
-                  Mayonnaise
-                </label>
-                <label>
-                  <Field
-                    name="sauces"
-                    component="input"
-                    type="checkbox"
-                    value="guacamole"
-                  />{' '}
-                  Guacamole 🥑
-                </label>
-              </div>
-            </div>  
-
+              <label>Favorite Activities</label>
+              <Field
+                name="activities"
+                component={ReactSelectAdapter}
+                options={activityList}
+                style={{width:"100%",background:"pink"}}
+              />
+            </div>
             <div>
               <label>Notes</label>
               <Field name="notes" component="textarea" placeholder="Notes" />

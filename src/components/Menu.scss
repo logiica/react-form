@@ -2,7 +2,7 @@
 $font: 'Rubik';
 
 .menu-container {
-    width: 20%;
+    width: 25%;
     margin: auto;
 }
 
@@ -10,13 +10,14 @@ $font: 'Rubik';
 .menu-box {
   display: flex;
   flex-direction: column;
-  background: #ff944d;
+/*  background: #ff944d;*/
 }
 
 .menu-box .title {
-  background: #11a8ab;
-  color: white;
-  font-size: 1.1em; /* 17px; */
+  /*background: #11a8ab;*/
+  color: #11a8ab; /*white; */@at-root
+  font-size: 1.3em; 
+  font-weight: bold;
 	display: block;
 	margin: 0;
   padding: 20px;
@@ -32,21 +33,25 @@ $font: 'Rubik';
 
 .menu-option {
   padding: 20px;
-	border-bottom: 1px solid #b34700;
-	-webkit-transition: background .5s;
-	transition: background .5s;  
+/*	border-bottom: 1px solid #b34700;*/
+  -webkit-transition: background .5s;
+	-webkit-transition: font-size .5s;  
+  transition: background .5s; 
+	transition: font-size .5s;     
 }
 
 .menu-option a {
 	text-decoration: none;
-	font-size: 15px;
-  color: #fff;
+	/*font-size: 15px;*/
+  color: #b34700; /*#fff;*/
   display: block;
 }
 
 .menu-option:hover {
-  background: #ff6600;
-	border-top: 1px solid #b34700;
+  background: #DCDCDC; /*#ff6600;*/
+  border: 1px solid #808080; /*#b34700;*/
+  font-size: 120%;
+  font-weight: bold;
 }
 
 

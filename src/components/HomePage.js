@@ -1,20 +1,18 @@
-import React, {Component} from 'react';
-import Menu from 'components/Menu';
-
+import { Component } from 'react'
 
 class HomePage extends Component {
-  render() {
+  render () {
     return (
-      <Menu 
-        title="Select a Form"
+      <Menu
+        title='Select a Form'
         options={[
-          {text: "Simple Form", path:"/simpleform"},
-          {text: "Validate Form", path:"/validateform"},
-          {text: "New and Edit Form", path:"/neweditform"},                
-        ]} 
-      /> 
+          { text: 'Simple Form", path:"/simpleform' },
+          { text: 'Validate Form", path:"/validateform' },
+          { text: 'New and Edit Form", path:"/neweditform' }
+        ]}
+      />
     )
   }
 }
 
-export default HomePage;
+export default HomePage

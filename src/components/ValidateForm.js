@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
+import { Component } from 'react'
 
 class ValidateForm extends Component {
-    
-  render() {
+  render () {
     return (
       <h1>ValidateForm</h1>
     )
   }
 }
 
-export default ValidateForm;
+export default ValidateForm
