@@ -1,20 +1,19 @@
-import { Component } from 'react'
+import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Form, Field } from 'react-final-form'
 import Select from 'react-select'
 import './Form.scss'
 
 const ReactSelectAdapter = ({ input, ...rest }) => (
-  <Select {...input} {...rest} searchable ismulti style={{width: '100%'}}/>
+  <Select {...input} {...rest} searchable isMulti />
 )
 
-const activityList = { 'E': 'Eat', 'P': 'Play','S': 'Sleep'};
 class SimpleForm extends Component {
 
-  constructor(props) {
-    super(props);
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onCancel = this.onCancel.bind(this);
+  constructor (props) {
+    super(props)
+    this.onSubmit = this.onSubmit.bind(this)
+    this.onCancel = this.onCancel.bind(this)
   }
 
   onSubmit(values) {
@@ -69,8 +68,8 @@ class SimpleForm extends Component {
     )
   }
 
-  render() {
-    let activityList = [{value: 'eat', label: 'Eat'},
+  render () {
+    const activityList = [{ value: 'eat', label: 'Eat' },
                         {value: 'play', label: 'Play'},
                         {value: 'party', label: 'Party'},
                         {value: 'sleep', label: 'Sleep'}]
@@ -128,7 +127,6 @@ class SimpleForm extends Component {
                 name="activities"
                 component={ReactSelectAdapter}
                 options={activityList}
-                style={{width:"100%",background:"pink"}}
               />
             </div>
             <div>
@@ -160,7 +158,6 @@ class SimpleForm extends Component {
       />
     )
   }
-
 }
-  export default withRouter(SimpleForm);
 
+export default withRouter(SimpleForm)

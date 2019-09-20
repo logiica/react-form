@@ -6,10 +6,11 @@ form {
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     border-radius: 3px;
     & > div {
-      display: flex;
-      flex-flow: row nowrap;
+     // display: flex;
+      //flex-flow: row nowrap;
       line-height: 2em;
       margin: 5px;
+
       & > label {
         color: #333;
         width: 110px;
@@ -19,7 +20,7 @@ form {
       & > input,
       & > select,
       & > textarea {
-        flex: 1;
+       // flex: 1;
         padding: 3px 5px;
         font-size: 1em;
         margin-left: 15px;
@@ -28,14 +29,14 @@ form {
       }
       & > input[type='checkbox'] {
         margin-top: 7px;
-      }
-      & > div {
-        margin-left: 16px;
-        & > label {
-          display: block;
-          & > input {
-            margin-right: 3px;
-          }
+      } 
+        & > div {
+          margin-left: 16px;
+          & > label {
+            display: block;
+            & > input {
+              margin-right: 3px;
+            }
         }
       }
     }
