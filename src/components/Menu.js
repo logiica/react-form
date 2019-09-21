@@ -20,14 +20,25 @@ class Menu extends Component {
     }
   }
 
+  renderTitle () {
+    const { title } = this.props;
+
+    if (title && title.length>0 ) {
+      return (
+        <div className="menu-row">
+          <h2 className="title">{title}</h2>
+        </div>        
+      )
+    }
+    return null;
+  }
+
   render () {
-    const { title, options } = this.props
+    const { options } = this.props
     return (
       <div className="menu-container">
         <div className="menu-box">
-          <div className="menu-row">
-            <h2 className="title">{title}</h2>
-          </div>
+          {this.renderTitle()}
           { options.map((option, index) =>
             <div className="menu-row menu-option" key={index}>
               <Link to={option.path}>{option.text}</Link>

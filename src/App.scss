@@ -1,9 +1,26 @@
 @import url('https://fonts.googleapis.com/css?family=Rubik:300');
+@import './AppStyleConstants';
+
 body {
-    margin: 3em;
     font-family: 'Rubik', sans-serif;
-  }
-  
+    background: $base-color;
+    margin: 2em;
+}
+
 h1 {
     text-align: center;
+    color: $emphasis-color;
+}
+
+h2 {
+  color: #6d6d6d;
+}
+
+.content-area {
+  width: 60%;
+  margin: auto;
+  padding: 1.5em;
+  background: $contrast-bg;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;  
 }

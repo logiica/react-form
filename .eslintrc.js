@@ -1,5 +1,5 @@
 module.exports = {
-    "extends": "standard",
+    "extends": ["standard", "eslint:recommended", "plugin:react/recommended"],
     "env": {
         "es6": true,
         "node": true

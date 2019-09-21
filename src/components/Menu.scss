@@ -1,21 +1,25 @@
- // @import url('https://fonts.googleapis.com/css?family=Rubik:300');
-$font: 'Rubik';
+@import '../AppStyleConstants';
 
 .menu-container {
-    width: 25%;
+    width: 85%;
     margin: auto;
+    background: white;
+    color: $base-color;
+    // border-radius: $border-radius;
+    // box-shadow: $box-shadow;  
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
 }
 
 /* the menu */
 .menu-box {
   display: flex;
   flex-direction: column;
-/*  background: #ff944d;*/
 }
 
 .menu-box .title {
-  /*background: #11a8ab;*/
-  color: #11a8ab; /*white; */@at-root
+  // color: #11a8ab; 
   font-size: 1.3em; 
   font-weight: bold;
 	display: block;
@@ -29,11 +33,12 @@ $font: 'Rubik';
 .menu-row {
   text-align: center;
   border-radius: 5px;
+  margin: 2px;
 }
 
 .menu-option {
   padding: 20px;
-/*	border-bottom: 1px solid #b34700;*/
+  border: 1px solid black;
   -webkit-transition: background .5s;
 	-webkit-transition: font-size .5s;  
   transition: background .5s; 
@@ -42,14 +47,13 @@ $font: 'Rubik';
 
 .menu-option a {
 	text-decoration: none;
-	/*font-size: 15px;*/
-  color: #b34700; /*#fff;*/
+  // color: #b34700; 
   display: block;
+  color: #0489ae;  
 }
 
 .menu-option:hover {
-  background: #DCDCDC; /*#ff6600;*/
-  border: 1px solid #808080; /*#b34700;*/
+  background: #DCDCDC;
   font-size: 120%;
   font-weight: bold;
 }

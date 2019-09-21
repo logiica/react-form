@@ -4,14 +4,19 @@ import Menu from 'components/Menu'
 class HomePage extends Component {
   render () {
     return (
-      <Menu
-        title='Select a Form'
-        options={[
-          { text: 'Simple Form', path:'/simpleform' },
-          { text: 'Validate Form', path:'/validateform' },
-          { text: 'New and Edit Form', path:'/neweditform' }
-        ]}
-      />
+      <React.Fragment>
+        <h2>Select a Form Implementation Style</h2>
+        <Menu
+          title=''
+          options={[
+            { text: 'Class Component', path: '/componentform' },
+            { text: 'Functional Component with Hooks', path: '/hooksform' },
+            { text: 'React-Final-Form', path: '/finalform' },
+            { text: 'Formik', path: '/formikform' }
+          ]}
+        />
+      </React.Fragment>
+
     )
   }
 }

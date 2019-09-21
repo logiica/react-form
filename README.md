@@ -1,5 +1,6 @@
 
-FormDemo - demo app showing different form features using React Final Form.
+FormDemo demonstrates different form implementations in React - straight React component, React with hooks, react-final-form, and formik.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

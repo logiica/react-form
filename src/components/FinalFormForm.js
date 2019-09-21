@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Form, Field } from 'react-final-form'
-import Select from 'react-select'
+import Select, { createFilter } from 'react-select'
 import './Form.scss'
 
 const ReactSelectAdapter = ({ input, ...rest }) => (
-  <Select {...input} {...rest} searchable isMulti />
+  <Select {...input} {...rest} searchable filterOption={createFilter({matchFrom:'start'})} isMulti />
 )
 
-class SimpleForm extends Component {
+class FinalFormForm extends Component {
 
   constructor (props) {
     super(props)
@@ -160,4 +160,4 @@ class SimpleForm extends Component {
   }
 }
 
-export default withRouter(SimpleForm)
+export default withRouter(FinalFormForm)
