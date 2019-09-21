@@ -22,7 +22,7 @@ class FinalFormForm extends Component {
   }
 
   onCancel() {
-    this.props.history.push('/');    
+    this.props.history.push('/');
   }
 
   renderInputField = (name,type,placeholder) => (
