@@ -5,8 +5,22 @@ body {
     font-family: 'Rubik', sans-serif;
     background: $base-color;
     margin: 2em;
+    padding-top: $header-height;
 }
 
+.header {
+  background: $contrast-bg;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  height: $header-height;
+  overflow: hidden;
+  -webkit-transition: height 0.3s;
+  -moz-transition: height 0.3s;
+  transition: height 0.3s;  
+}
 h1 {
     text-align: center;
     color: $emphasis-color;
@@ -20,7 +34,7 @@ h2 {
   width: 60%;
   margin: auto;
   padding: 1.5em;
-  background: $contrast-bg;
+ // background: $contrast-bg;
   border-radius: $border-radius;
   box-shadow: $box-shadow;  
 }

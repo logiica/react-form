@@ -5,7 +5,7 @@ import Select, { createFilter } from 'react-select'
 import './Form.scss'
 
 const ReactSelectAdapter = ({ input, ...rest }) => (
-  <Select {...input} {...rest} searchable filterOption={createFilter({matchFrom:'start'})} isMulti />
+  <Select {...input} {...rest} searchable filterOption={createFilter({ matchFrom:'start'})} isMulti />
 )
 
 class FinalFormForm extends Component {

@@ -11,11 +11,11 @@ import HooksForm from 'components/HooksForm'
 class App extends React.Component {
   render () {
     return (
-      <React.Fragment>       
+      <React.Fragment>
         <header>
           <div className="header">
-            <h1>React Form Demo</h1>              
-          </div> 
+            <h1>React Form Demo</h1>
+          </div>
         </header>
 
         <main>
@@ -24,11 +24,11 @@ class App extends React.Component {
               <Switch>
                 <Route exact path="/" component={HomePage} />
                 <Route path="/componentform" component={ComponentForm} />
-                <Route path="/hooksform" component={HooksForm} />            
+                <Route path="/hooksform" component={HooksForm} />
                 <Route path="/finalform" component={FinalFormForm} />
                 <Route path="/formikform" component={FormikForm} />
               </Switch>
-            </BrowserRouter>              
+            </BrowserRouter>
           </div>
         </main>
 

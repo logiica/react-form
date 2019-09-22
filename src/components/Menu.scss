@@ -45,15 +45,16 @@
 	transition: font-size .5s;     
 }
 
-.menu-option a {
+.menu-option a{
 	text-decoration: none;
   // color: #b34700; 
   display: block;
-  color: #0489ae;  
+  color: $contrast-bg;  
 }
 
-.menu-option:hover {
-  background: #DCDCDC;
+.menu-option:hover, a:hover {
+  background: $contrast-bg2;
+  color: $emphasis-color2;
   font-size: 120%;
   font-weight: bold;
 }
