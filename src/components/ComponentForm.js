@@ -1,103 +1,109 @@
-import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
-import './Form.scss'
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import Select, { createFilter } from 'react-select';
+
+import { DefaultValues, TypeOptions, AgeOptions, ActivityOptions, isValidFieldName } from 'components/FormConstants';
+import './Form.scss';
 
 class ComponentForm extends Component {
-  InitialState = { pristine: true, petName: '', type: 'dog', ageGroup: '< 1', toppings: ['chicken'] };
-
-  TypeOptions = [
-    { value: 'dog', label: 'Dog' },
-    { value: 'cat', label: 'Cat' },
-    { value: 'bird', label: 'Bird' }
-  ]
- 
-  AgeOptions = [
-    { value: '< 1', label: 'Less than 1 Year' },
-    { value: '<= 5', label: '1 to 5 Years' },
-    { value: '<= 10', label: '6 to 10 Years' },
-    { value: 'old guy', label: 'More than 10 Years Old' }
-  ]
+  InitialState = {
+    pristine: true,
+    ...DefaultValues
+  };
 
   constructor (props) {
-    super(props)
-    this.state = this.InitialState
+    super(props);
+    this.state = this.InitialState;
 
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleArrayChange = this.handleArrayChange.bind(this)
+    this.handleChange = this.handleChange.bind(this);
+    this.handleArrayChange = this.handleArrayChange.bind(this);
+    this.handleActivitiesChange = this.handleActivitiesChange.bind(this);
   }
 
-  handleCancel = () => this.props.history.push('/')
-  handleReset = () => this.setState(this.InitialState)
-
-  handleChange (event) {
-    const name = event.target.name
-    const value = event.target.value
-
-    this.setState({
-      ...this.state,
-      pristine: false,
-      [name]: value
-    })
+  // button handlers
+  handleCancel = () => this.props.history.push('/');
+  handleReset = () => this.setState(this.InitialState);
+  handleSubmit = (event) => {
+    event.preventDefault();
+    // To Do: activities[] from React Select will have objects (label+value)
+    // Results for submit should map activities to just contain the values
+    alert('Form Submitted: ' + JSON.stringify(this.state, 0, 2));
+    this.props.history.push('/');
   }
 
-  handleArrayChange (event) {
-    const name = event.target.name
-    const options = event.target.options
-    const values = []
-    for (let i = 0, l = options.length; i < l; i++) {
-      if (options[i].selected) {
-        values.push(options[i].value)
-      }
+  // change handlers
+  handleChange (event) { // For simple form elmement
+    const { name, value } = event.target;
+    if (isValidFieldName(name)) {
+      this.setState({
+        ...this.state,
+        pristine: false,
+        [name]: value
+      });
     }
+  }
+
+  handleArrayChange (event) { // for HTML selelct
+    const { name, options } = event.target;
+    const values = [];
+    if (isValidFieldName(name)) {
+      for (let i = 0, l = options.length; i < l; i++) {
+        if (options[i].selected) {
+          values.push(options[i].value);
+        }
+      }
+      this.setState({
+        ...this.state,
+        pristine: false,
+        [name]: values
+      });
+    }
+  }
+
+  handleActivitiesChange (selected) { // for React-Select for activities
     this.setState({
       ...this.state,
       pristine: false,
-      [name]: values
-    }) 
-  }
-
-  handleSubmit (event) {
-    event.preventDefault()
-    alert ('Form Submitted: ' + JSON.stringify(this.state, 0, 2))
-    this.props.history.push('/')
-  }
-
-  isChecked (name, value) {
-    return (this.state[name] === value)
-  }
-
-  isSelected (name, value) {
-    return this.state[name].includes(value)
+      activities: selected
+    });
   }
 
   renderRadioButtons (name, options) {
     return options.map((opt) => {
-      const { value, label } = opt
+      const { value, label } = opt;
+      const isChecked = this.state[name] === value;
       return (
         <div key={value}>
           <input type="radio"
             name={name}
             value={value}
-            checked={this.isChecked(name, value)}
+            checked={isChecked}
             onChange={this.handleChange}
           />
           {label}
         </div>
-      )
-    })
+      );
+    });
   }
 
   renderSelectOptions (name, options, multiple) {
     return options.map((opt) => {
-      const { value, label } = opt
-      return (
-        <option key={value} value={value} selected={multiple? this.isSelected(name,value) : this.isChecked(name, value)}>{label}</option>
-    ) })
+      const { value, label } = opt;
+      let isSelected;
+      if (multiple) {
+        isSelected = this.state[name].includes(value);
+      } else {
+        isSelected = this.state[name] === value;
+      }
+      return ((isSelected)
+        ? <option key={value} value={value} defaultValue={value} >{label}</option>
+        : <option key={value} value={value}>{label}</option>
+      );
+    });
   }
 
   render () {
-    const { pristine } = this.state
+    const { pristine } = this.state;
 
     return (
       <form onSubmit={this.handleSubmit}>
@@ -108,18 +114,18 @@ class ComponentForm extends Component {
         <div>
           <label>Type</label>
           <div>
-            {this.renderRadioButtons('type', this.TypeOptions)}
+            {this.renderRadioButtons('type', TypeOptions)}
           </div>
         </div>
         <div>
           <label>Age Group</label>
           <select name="ageGroup" onChange={this.handleChange}>
-            {this.renderSelectOptions('ageGroup', this.AgeOptions, false)}     
+            {this.renderSelectOptions('ageGroup', AgeOptions, false)}
           </select>
         </div>
         <div>
           <label>Toppings</label>
-          <select name="toppings" onChange={this.handleArrayChange} multiple>        
+          <select name="toppings" onChange={this.handleArrayChange} multiple>
             {this.renderSelectOptions(
               'toppings',
               [
@@ -128,12 +134,27 @@ class ComponentForm extends Component {
                 { value: 'mushrooms', label: '🍄 Mushrooms' },
                 { value: 'cheese', label: '🧀 Cheese' },
                 { value: 'tuna', label: '🐟 Tuna' },
-                { value: 'pineapple', label: '🍍 Pineapple' }                                                                                                                                                                     
+                { value: 'pineapple', label: '🍍 Pineapple' }
               ],
               true
             )}
           </select>
         </div>
+        <div>
+          <label>Favorite Activities</label>
+          <Select
+            name="activities"
+            searchable filterOption={createFilter({ matchFrom: 'start' })} isMulti
+            value={this.state.activities}
+            onChange={this.handleActivitiesChange}
+            options={ActivityOptions}
+          />
+        </div>
+        <div>
+          <label>Notes</label>
+          <textarea name="notes" onChange={this.handleChange} value={this.state.notes}></textarea>
+        </div>
+
         <div className="buttons">
           <button type="submit" disabled={pristine}>
             Submit
@@ -154,8 +175,8 @@ class ComponentForm extends Component {
         </div>
         <pre>Form Values: {JSON.stringify(this.state, 0, 2)}</pre>
       </form>
-    )
+    );
   }
 }
 
-export default withRouter(ComponentForm)
+export default withRouter(ComponentForm);

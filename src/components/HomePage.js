@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Menu from 'components/Menu'
+import Menu from 'components/menu/Menu'
 
 class HomePage extends Component {
   render () {
