@@ -3,7 +3,20 @@ import { withRouter } from 'react-router-dom'
 import './Form.scss'
 
 class ComponentForm extends Component {
-  InitialState = { pristine: true, petName: '', type: 'dog', ageGroup: '< 1' };
+  InitialState = { pristine: true, petName: '', type: 'dog', ageGroup: '< 1', toppings: ['chicken'] };
+
+  TypeOptions = [
+    { value: 'dog', label: 'Dog' },
+    { value: 'cat', label: 'Cat' },
+    { value: 'bird', label: 'Bird' }
+  ]
+ 
+  AgeOptions = [
+    { value: '< 1', label: 'Less than 1 Year' },
+    { value: '<= 5', label: '1 to 5 Years' },
+    { value: '<= 10', label: '6 to 10 Years' },
+    { value: 'old guy', label: 'More than 10 Years Old' }
+  ]
 
   constructor (props) {
     super(props)
@@ -11,17 +24,11 @@ class ComponentForm extends Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleReset = this.handleReset.bind(this)
-    this.handleCancel = this.handleCancel.bind(this)
+    this.handleArrayChange = this.handleArrayChange.bind(this)
   }
 
-  handleCancel () {
-    this.props.history.push('/')
-  }
-
-  handleReset () {
-    this.setState(this.InitialState)
-  }
+  handleCancel = () => this.props.history.push('/')
+  handleReset = () => this.setState(this.InitialState)
 
   handleChange (event) {
     const name = event.target.name
@@ -34,6 +41,22 @@ class ComponentForm extends Component {
     })
   }
 
+  handleArrayChange (event) {
+    const name = event.target.name
+    const options = event.target.options
+    const values = []
+    for (let i = 0, l = options.length; i < l; i++) {
+      if (options[i].selected) {
+        values.push(options[i].value)
+      }
+    }
+    this.setState({
+      ...this.state,
+      pristine: false,
+      [name]: values
+    }) 
+  }
+
   handleSubmit (event) {
     event.preventDefault()
     alert ('Form Submitted: ' + JSON.stringify(this.state, 0, 2))
@@ -42,6 +65,10 @@ class ComponentForm extends Component {
 
   isChecked (name, value) {
     return (this.state[name] === value)
+  }
+
+  isSelected (name, value) {
+    return this.state[name].includes(value)
   }
 
   renderRadioButtons (name, options) {
@@ -61,12 +88,12 @@ class ComponentForm extends Component {
     })
   }
 
-  renderSelectOptions (name,options) {
+  renderSelectOptions (name, options, multiple) {
     return options.map((opt) => {
       const { value, label } = opt
       return (
-        <option value={value} selected={this.isChecked(name, value)}>{label}</option>
-    )})
+        <option key={value} value={value} selected={multiple? this.isSelected(name,value) : this.isChecked(name, value)}>{label}</option>
+    ) })
   }
 
   render () {
@@ -81,27 +108,32 @@ class ComponentForm extends Component {
         <div>
           <label>Type</label>
           <div>
-            {this.renderRadioButtons('type',
-              [{ value: 'dog', label: 'Dog' },
-                { value: 'cat', label: 'Cat' },
-                { value: 'bird', label: 'Bird' }])}
+            {this.renderRadioButtons('type', this.TypeOptions)}
           </div>
         </div>
         <div>
           <label>Age Group</label>
           <select name="ageGroup" onChange={this.handleChange}>
-            {this.renderSelectOptions(
-              'ageGroup',
-              [
-                { value: '< 1', label: 'Less than 1 Year' },
-                { value: '<= 5', label: '1 to 5 Years' },
-                { value: '<= 10', label: '6 to 10 Years' },
-                { value: 'old guy', label: 'More than 10 Years Old' }                                                                                                  
-              ]
-            )}        
+            {this.renderSelectOptions('ageGroup', this.AgeOptions, false)}     
           </select>
         </div>
-
+        <div>
+          <label>Toppings</label>
+          <select name="toppings" onChange={this.handleArrayChange} multiple>        
+            {this.renderSelectOptions(
+              'toppings',
+              [
+                { value: 'chicken', label: '🐓 Chicken' },
+                { value: 'ham', label: '🐷 Ham' },
+                { value: 'mushrooms', label: '🍄 Mushrooms' },
+                { value: 'cheese', label: '🧀 Cheese' },
+                { value: 'tuna', label: '🐟 Tuna' },
+                { value: 'pineapple', label: '🍍 Pineapple' }                                                                                                                                                                     
+              ],
+              true
+            )}
+          </select>
+        </div>
         <div className="buttons">
           <button type="submit" disabled={pristine}>
             Submit
