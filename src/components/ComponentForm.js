@@ -95,9 +95,9 @@ class ComponentForm extends Component {
       } else {
         isSelected = this.state[name] === value;
       }
-      return ((isSelected)
-        ? <option key={value} value={value} defaultValue={value} >{label}</option>
-        : <option key={value} value={value}>{label}</option>
+      // Note: react complains about 'selected' but using defaultValue doesn't work for reset
+      return (
+        <option key={value} value={value} selected={isSelected} >{label}</option>
       );
     });
   }
