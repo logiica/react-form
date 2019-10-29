@@ -25,7 +25,7 @@ class ComponentForm extends Component {
   handleReset = () => this.setState(this.InitialState);
   handleSubmit = (event) => {
     console.log('Handle submit!');
-   // event.preventDefault();
+    // event.preventDefault();
     // To Do: activities[] from React Select will have objects (label+value)
     // Results for submit should map activities to just contain the values
     alert('Form Submitted: ' + JSON.stringify(this.state, 0, 2));
@@ -107,7 +107,8 @@ class ComponentForm extends Component {
     const { pristine } = this.state;
 
     return (
-      <form onSubmit={this.handleSubmit} netlify >
+      <form onSubmit={this.handleSubmit}  >
+        <input type="hidden" name="form-name" value="componentform" />
         <div>
           <label>Pet Name</label>
           <input type="text" name="petName" value={this.state.petName} onChange={this.handleChange} />
