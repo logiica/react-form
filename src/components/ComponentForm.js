@@ -107,7 +107,7 @@ class ComponentForm extends Component {
     const { pristine } = this.state;
 
     return (
-      <form method="POST" >
+      <form method="POST" action='/'>
         <input type="hidden" name="form-name" value="componentform" />
         <div>
           <label>Pet Name</label>
@@ -158,7 +158,7 @@ class ComponentForm extends Component {
         </div>
 
         <div className="buttons">
-          <button type="submit" disabled={pristine} onClick={this.handleSubmit}>
+          <button type="submit" disabled={pristine} >
             Submit
           </button>
           <button
