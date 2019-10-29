@@ -1,12 +1,12 @@
-import React from 'react'
-import { Route, Switch, BrowserRouter } from 'react-router-dom'
-import './App.scss'
+import React from 'react';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
+import './App.scss';
 
-import HomePage from 'components/HomePage'
-import FinalFormForm from 'components/FinalFormForm'
-import FormikForm from 'components/FormikForm'
-import ComponentForm from 'components/ComponentForm'
-import HooksForm from 'components/HooksForm'
+import HomePage from 'components/HomePage';
+import FinalFormForm from 'components/FinalFormForm';
+import FormikForm from 'components/FormikForm';
+import ComponentForm from 'components/ComponentForm';
+import HooksForm from 'components/HooksForm';
 
 class App extends React.Component {
   render () {
@@ -33,8 +33,8 @@ class App extends React.Component {
         </main>
 
       </React.Fragment>
-    )
+    );
   }
 }
 
-export default App
+export default App;
