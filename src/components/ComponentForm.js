@@ -20,6 +20,12 @@ class ComponentForm extends Component {
     this.handleActivitiesChange = this.handleActivitiesChange.bind(this);
   }
 
+  
+  encode = (data) => {
+    return Object.keys(data)
+      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .join("&");
+  }
   // button handlers
   handleCancel = () => this.props.history.push('/');
   handleReset = () => this.setState(this.InitialState);
@@ -32,7 +38,7 @@ class ComponentForm extends Component {
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "contact", ...this.state })
+      body: this.encode({ "form-name": "contact", ...this.state })
     })
       .then(() => {
         alert('Form Submitted: ' + JSON.stringify(this.state, 0, 2))
