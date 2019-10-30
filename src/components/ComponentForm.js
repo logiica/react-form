@@ -25,11 +25,23 @@ class ComponentForm extends Component {
   handleReset = () => this.setState(this.InitialState);
   handleSubmit = (event) => {
     console.log('Handle submit!');
-    // event.preventDefault();
+    event.preventDefault();
     // To Do: activities[] from React Select will have objects (label+value)
     // Results for submit should map activities to just contain the values
-    alert('Form Submitted: ' + JSON.stringify(this.state, 0, 2));
-    this.props.history.push('/');
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({ "form-name": "contact", ...this.state })
+    })
+      .then(() => {
+        alert('Form Submitted: ' + JSON.stringify(this.state, 0, 2))
+        this.props.history.push('/');
+      }) 
+      .catch(error => {
+        alert(error)
+        this.props.history.push('/');
+      });
   }
 
   // change handlers
@@ -107,7 +119,7 @@ class ComponentForm extends Component {
     const { pristine } = this.state;
 
     return (
-      <form method="POST" action='/'>
+      <form onSubmit={this.handleSubmit}  >
         <input type="hidden" name="form-name" value="componentform" />
         <div>
           <label>Pet Name</label>
@@ -158,7 +170,7 @@ class ComponentForm extends Component {
         </div>
 
         <div className="buttons">
-          <button type="submit" disabled={pristine} >
+          <button type="submit" disabled={pristine} onClick={this.handleSubmit}>
             Submit
           </button>
           <button
