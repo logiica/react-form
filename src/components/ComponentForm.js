@@ -38,7 +38,7 @@ class ComponentForm extends Component {
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: this.encode({ "form-name": "contact", ...this.state })
+      body: this.encode({ "form-name": "componentform", ...this.state })
     })
       .then(() => {
         alert('Form Submitted: ' + JSON.stringify(this.state, 0, 2))
