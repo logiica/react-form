@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "final-form": "^4.18.5",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-final-form": "^6.3.0",
